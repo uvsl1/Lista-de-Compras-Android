@@ -1,4 +1,4 @@
-package com.example.listinha.ui.activities
+package com.example.listinha.ui.app.ui.activities
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

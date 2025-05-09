@@ -1,4 +1,4 @@
-package com.example.listinha.ui.activities
+package com.example.listinha.ui.app.data.models
 
 data class Produto(
     var nomeProduto: String,
