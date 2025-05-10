@@ -29,4 +29,4 @@ classDiagram
      }  
  
      Main "1" -- "*" ListaCompras : possui  
-     ListaCompras "1" -- "*" ItemLista : contém 
+     ListaCompras "1" -- "*" Produto : contém 
