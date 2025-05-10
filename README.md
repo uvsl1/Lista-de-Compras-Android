@@ -12,20 +12,20 @@ classDiagram
      }  
  
      class ListaCompras {  
+         +Int id
          +String nome  
-         +List<ItemLista> itens  
-         +Double totalCarrinho  
-         +adicionarItem(produto: Produto, quantidade: Int)  
-         +calcularTotalCarrinho(): Double  
+         +List<ItemLista> produtos  
+         +BigDecimal totalCarrinho
      }  
  
-     class ItemLista {  
-         +String nomeProduto  
-         +int quantidade  
-         +boolean pego  
-         +Double precoUnitario
-         +Double precoTotal
-         +marcarComoPego(preco: Double)
+     class Produto {  
+         +Int id
+         +String nome  
+         +BigDecimal quantidade  
+         +boolean status  
+         +BigDecimal precoUnitario
+         +BigDecimal precoTotal
+         +alterarStatus()
      }  
  
      Main "1" -- "*" ListaCompras : possui  
