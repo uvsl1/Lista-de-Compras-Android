@@ -17,7 +17,7 @@ git pull origin main
 git checkout -b feat/nome-da-tarefa
 
 # 4. Adicionar arquivos modificados
-git add NomeDoArquivo.java
+git add NomeDoArquivo.kt
 
 # 5. Criar o commit
 git commit -m "feat: descrição da atividade realizada"
@@ -60,7 +60,7 @@ Use prefixos para indicar o tipo de alteração:
 **Exemplo:**
 
 ```bash
-git commit -m "feat: adiciona tela de cadastro de pets"
+git commit -m "feat: adiciona tela de cadastro de produtos"
 ```
 
 ---
