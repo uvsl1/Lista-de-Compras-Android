@@ -2,16 +2,15 @@ package com.example.listinha.ui.app.data.repository
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
-import com.example.listinha.ui.app.data.database.listinhaDbHelper
+import com.example.listinha.ui.app.data.database.ListinhaDbHelper
 import com.example.listinha.ui.app.data.models.ListaCompras
 import com.example.listinha.ui.app.data.models.Produto
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class listinhaRepository(context: Context) {
+class ListinhaRepository(context: Context) {
 
-    private val dbHelper = listinhaDbHelper(context)
+    private val dbHelper = ListinhaDbHelper(context)
 
     fun inserirLista(lista: ListaCompras): Long {
         val db = dbHelper.writableDatabase

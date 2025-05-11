@@ -6,7 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listinha.R
 import com.example.listinha.ui.app.data.models.*
-import com.example.listinha.ui.app.data.repository.listinhaRepository
+import com.example.listinha.ui.app.data.repository.ListinhaRepository
 import java.math.BigDecimal
 
 
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         Log.i("ciclo_vida", "onCreate")
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        val repo = listinhaRepository(this)
+        val repo = ListinhaRepository(this)
 
 
         //EXEMPLO DE ROTINA SISTEMA
