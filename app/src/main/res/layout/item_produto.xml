@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/nomeProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome do Produto"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/quantidadeProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantidade"/>
+
+    <TextView
+        android:id="@+id/precoProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preço Unitário"/>
+
+    <TextView
+        android:id="@+id/totalProduto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preço Total"/>
+</LinearLayout>
