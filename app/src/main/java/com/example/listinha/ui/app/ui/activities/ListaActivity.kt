@@ -27,7 +27,7 @@ class ListaActivity : AppCompatActivity() {
             lista?.let {
                 binding.nomeLista.text = it.nome
 
-                val adapter = ProdutoAdapter(this, it.produtos)
+                val adapter = ProdutoAdapter(this, it.produtos.toMutableList())
                 binding.rvProdutos.layoutManager = LinearLayoutManager(this)
                 binding.rvProdutos.adapter = adapter
 

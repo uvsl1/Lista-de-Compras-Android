@@ -110,6 +110,19 @@ class ListinhaRepository(context: Context) {
         )
     }
 
+    fun atualizarStatusProduto(idProduto: Int, status: Boolean) {
+        val db = dbHelper.writableDatabase
+        val values = ContentValues().apply {
+            put("status", if (status) 1 else 0)
+        }
+        db.update(
+            "produto",
+            values,
+            "id = ?",
+            arrayOf(idProduto.toString())
+        )
+    }
+
     fun excluirProduto(idProduto: Int) {
         val db = dbHelper.writableDatabase
         db.delete("produto", "id = ?", arrayOf(idProduto.toString()))

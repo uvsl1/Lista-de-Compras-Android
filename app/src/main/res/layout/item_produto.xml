@@ -3,31 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="12dp">
 
-    <TextView
-        android:id="@+id/nomeProduto"
+    <CheckBox
+        android:id="@+id/checkProduto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome do Produto"
-        android:textSize="18sp"/>
+        android:layout_marginEnd="8dp"/>
 
-    <TextView
-        android:id="@+id/quantidadeProduto"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Quantidade"/>
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/precoProduto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Preço Unitário"/>
+        <TextView
+            android:id="@+id/nomeProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Produto"
+            android:textSize="18sp"/>
 
-    <TextView
-        android:id="@+id/totalProduto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Preço Total"/>
+        <TextView
+            android:id="@+id/quantidadeProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantidade"/>
+
+        <TextView
+            android:id="@+id/precoProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço Unitário"/>
+
+        <TextView
+            android:id="@+id/totalProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço Total"/>
+    </LinearLayout>
 </LinearLayout>
