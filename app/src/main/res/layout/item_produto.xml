@@ -46,8 +46,8 @@
 
     <ImageButton
         android:id="@+id/btnEditar"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:src="@drawable/ic_editar"
         android:contentDescription="Editar Produto"
         android:background="?android:attr/selectableItemBackgroundBorderless"

@@ -25,7 +25,6 @@ class ProdutoAdapter(
             binding.precoProduto.text = "Preço Un ou Kg: R$ ${produto.precoUnitario}"
             binding.totalProduto.text = "Total: R$ ${produto.precoTotal}"
 
-            // CheckBox de status
             binding.checkProduto.setOnCheckedChangeListener(null)
             binding.checkProduto.isChecked = produto.status
 
@@ -38,7 +37,6 @@ class ProdutoAdapter(
                 ordenarProdutosComMovimento()
             }
 
-            // Clique no botão Editar
             binding.btnEditar.setOnClickListener {
                 abrirDialogoEdicao(produto)
             }
@@ -76,13 +74,21 @@ class ProdutoAdapter(
             .setTitle("Editar Produto")
             .setView(layout)
             .setPositiveButton("Salvar") { _, _ ->
-                produto.nome = inputNome.text.toString().ifBlank { produto.nome }
+                val novoNome = inputNome.text.toString().ifBlank { produto.nome }
+                val novaQtd = inputQtd.text.toString().toBigDecimalOrNull()?.setScale(2)
+                val novoPreco = inputPreco.text.toString().toBigDecimalOrNull()?.setScale(2)
 
-                produto.quantidade = inputQtd.text.toString().toBigDecimalOrNull()?.setScale(2)
-                    ?: produto.quantidade
+                val repo = ListinhaRepository(context)
 
-                produto.precoUnitario = inputPreco.text.toString().toBigDecimalOrNull()?.setScale(2)
-                    ?: produto.precoUnitario
+                produto.nome = novoNome
+                if (novaQtd != null) produto.quantidade = novaQtd
+                if (novoPreco != null) produto.precoUnitario = novoPreco
+
+                produto.id?.let {
+                    if (novaQtd != null && novoPreco != null) {
+                        repo.atualizarProduto(it, novaQtd, novoPreco)
+                    }
+                }
 
                 notifyDataSetChanged()
                 ordenarProdutosComMovimento()
@@ -90,6 +96,7 @@ class ProdutoAdapter(
             .setNegativeButton("Cancelar", null)
             .show()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(context)
