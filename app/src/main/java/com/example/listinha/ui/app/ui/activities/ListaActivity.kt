@@ -1,6 +1,8 @@
 package com.example.listinha.ui.app.ui.activities
 
 import android.os.Bundle
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listinha.databinding.ActivityListaBinding
@@ -28,6 +30,26 @@ class ListaActivity : AppCompatActivity() {
                 val adapter = ProdutoAdapter(this, it.produtos)
                 binding.rvProdutos.layoutManager = LinearLayoutManager(this)
                 binding.rvProdutos.adapter = adapter
+
+                binding.btnEditar.setOnClickListener {
+                    val editText = EditText(this).apply {
+                        setText(binding.nomeLista.text.toString())
+                    }
+
+                    AlertDialog.Builder(this)
+                        .setTitle("Editar Nome da Lista")
+                        .setView(editText)
+                        .setPositiveButton("Salvar") { _, _ ->
+                            val novoNome = editText.text.toString().trim()
+                            if (novoNome.isNotEmpty()) {
+                                binding.nomeLista.text = novoNome
+                                repo.atualizarLista(lista.id!!, novoNome)
+                            }
+                        }
+                        .setNegativeButton("Cancelar", null)
+                        .create()
+                        .show()
+                }
             }
         }
     }
