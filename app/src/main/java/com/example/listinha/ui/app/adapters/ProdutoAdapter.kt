@@ -79,4 +79,8 @@ class ProdutoAdapter(
             notifyDataSetChanged()
         }
     }
+    fun adicionarProduto(produto: Produto) {
+        produtos.add(produto)
+        ordenarProdutosComMovimento()
+    }
 }

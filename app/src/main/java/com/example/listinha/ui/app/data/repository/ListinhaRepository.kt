@@ -127,4 +127,23 @@ class ListinhaRepository(context: Context) {
         val db = dbHelper.writableDatabase
         db.delete("produto", "id = ?", arrayOf(idProduto.toString()))
     }
+
+    fun inserirProduto(produto: Produto): Int {
+        val db = dbHelper.writableDatabase
+
+        val precoUnitario = produto.precoUnitario.setScale(2, RoundingMode.HALF_UP)
+        val quantidade = produto.quantidade.setScale(2, RoundingMode.HALF_UP)
+        val precoTotal = quantidade.multiply(precoUnitario).setScale(2, RoundingMode.HALF_UP)
+
+        val values = ContentValues().apply {
+            put("nome", produto.nome)
+            put("quantidade", quantidade.toDouble())
+            put("status", if (produto.status) 1 else 0)
+            put("precoUnitario", precoUnitario.toDouble())
+            put("precoTotal", precoTotal.toDouble())
+            put("idListaCompras", produto.listaId)
+        }
+
+        return db.insert("produto", null, values).toInt()
+    }
 }
