@@ -43,4 +43,15 @@
             android:layout_height="wrap_content"
             android:text="Preço Total"/>
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btnEditar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/ic_editar"
+        android:contentDescription="Editar Produto"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_marginStart="8dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="8dp"/>
 </LinearLayout>

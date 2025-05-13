@@ -3,6 +3,9 @@ package com.example.listinha.ui.app.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listinha.databinding.ItemProdutoBinding
 import com.example.listinha.ui.app.data.models.Produto
@@ -17,25 +20,75 @@ class ProdutoAdapter(
 
     inner class ViewHolder(private val binding: ItemProdutoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(produto: Produto) {
-            binding.nomeProduto.text = produto.nome
+            binding.nomeProduto.text = "Nome do produto: ${produto.nome}"
             binding.quantidadeProduto.text = "Qtd: ${produto.quantidade}"
             binding.precoProduto.text = "Preço Un ou Kg: R$ ${produto.precoUnitario}"
             binding.totalProduto.text = "Total: R$ ${produto.precoTotal}"
 
+            // CheckBox de status
             binding.checkProduto.setOnCheckedChangeListener(null)
             binding.checkProduto.isChecked = produto.status
 
             binding.checkProduto.setOnCheckedChangeListener { _, isChecked ->
                 produto.status = isChecked
-
                 produto.id?.let { id ->
                     val repo = ListinhaRepository(context)
                     repo.atualizarStatusProduto(id, isChecked)
                 }
-
                 ordenarProdutosComMovimento()
             }
+
+            // Clique no botão Editar
+            binding.btnEditar.setOnClickListener {
+                abrirDialogoEdicao(produto)
+            }
         }
+    }
+
+    private fun abrirDialogoEdicao(produto: Produto) {
+        val layout = LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(40, 30, 40, 10)
+        }
+
+        val inputNome = EditText(context).apply {
+            hint = "Nome do produto"
+            setText(produto.nome)
+        }
+
+        val inputQtd = EditText(context).apply {
+            hint = "Quantidade"
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
+            setText(produto.quantidade.toPlainString())
+        }
+
+        val inputPreco = EditText(context).apply {
+            hint = "Preço Unitário"
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
+            setText(produto.precoUnitario.toPlainString())
+        }
+
+        layout.addView(inputNome)
+        layout.addView(inputQtd)
+        layout.addView(inputPreco)
+
+        AlertDialog.Builder(context)
+            .setTitle("Editar Produto")
+            .setView(layout)
+            .setPositiveButton("Salvar") { _, _ ->
+                produto.nome = inputNome.text.toString().ifBlank { produto.nome }
+
+                produto.quantidade = inputQtd.text.toString().toBigDecimalOrNull()?.setScale(2)
+                    ?: produto.quantidade
+
+                produto.precoUnitario = inputPreco.text.toString().toBigDecimalOrNull()?.setScale(2)
+                    ?: produto.precoUnitario
+
+                notifyDataSetChanged()
+                ordenarProdutosComMovimento()
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -75,10 +128,10 @@ class ProdutoAdapter(
                     notifyItemMoved(i, novoIndex)
                 }
             }
-
             notifyDataSetChanged()
         }
     }
+
     fun adicionarProduto(produto: Produto) {
         produtos.add(produto)
         ordenarProdutosComMovimento()
