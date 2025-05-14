@@ -89,7 +89,7 @@ class ListinhaRepository(context: Context) {
         db.delete("listaCompras", "id = ?", arrayOf(id.toString()))
     }
 
-    fun atualizarProduto(idProduto: Int, novaQuantidade: BigDecimal, novoPrecoUnitario: BigDecimal) {
+    fun atualizarProduto(idProduto: Int, novoNome: String, novaQuantidade: BigDecimal, novoPrecoUnitario: BigDecimal) {
         val db = dbHelper.writableDatabase
 
         val quantidade = novaQuantidade.setScale(2, RoundingMode.HALF_UP)
@@ -97,6 +97,7 @@ class ListinhaRepository(context: Context) {
         val precoTotal = quantidade.multiply(precoUnitario).setScale(2, RoundingMode.HALF_UP)
 
         val values = ContentValues().apply {
+            put("nome", novoNome)
             put("quantidade", quantidade.toDouble())
             put("precoUnitario", precoUnitario.toDouble())
             put("precoTotal", precoTotal.toDouble())

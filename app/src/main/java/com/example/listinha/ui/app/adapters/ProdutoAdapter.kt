@@ -20,7 +20,7 @@ class ProdutoAdapter(
 
     inner class ViewHolder(private val binding: ItemProdutoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(produto: Produto) {
-            binding.nomeProduto.text = "Nome do produto: ${produto.nome}"
+            binding.nomeProduto.text = "${produto.nome}"
             binding.quantidadeProduto.text = "Qtd: ${produto.quantidade}"
             binding.precoProduto.text = "Preço Un ou Kg: R$ ${produto.precoUnitario}"
             binding.totalProduto.text = "Total: R$ ${produto.precoTotal}"
@@ -86,7 +86,7 @@ class ProdutoAdapter(
 
                 produto.id?.let {
                     if (novaQtd != null && novoPreco != null) {
-                        repo.atualizarProduto(it, novaQtd, novoPreco)
+                        repo.atualizarProduto(it, novoNome, novaQtd, novoPreco)
                     }
                 }
 
@@ -96,7 +96,6 @@ class ProdutoAdapter(
             .setNegativeButton("Cancelar", null)
             .show()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(context)
