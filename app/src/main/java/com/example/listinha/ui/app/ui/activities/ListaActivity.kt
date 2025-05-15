@@ -35,11 +35,14 @@ class ListaActivity : AppCompatActivity() {
             lista?.let {
                 binding.nomeLista.text = it.nome
 
-                adapter = ProdutoAdapter(this, it.produtos.toMutableList())
+                adapter = ProdutoAdapter(this, it.produtos.toMutableList()) {
+                    atualizarValorTotal()
+                }
                 binding.rvProdutos.layoutManager = LinearLayoutManager(this)
                 binding.rvProdutos.adapter = adapter
 
-                // Botão editar nome
+                atualizarValorTotal()
+
                 binding.btnEditar.setOnClickListener {
                     val editText = EditText(this).apply {
                         setText(binding.nomeLista.text.toString())
@@ -86,6 +89,7 @@ class ListaActivity : AppCompatActivity() {
                                 val idInserido = repo.inserirProduto(novoProduto)
                                 novoProduto.id = idInserido.toInt()
                                 adapter.adicionarProduto(novoProduto)
+                                atualizarValorTotal()
                             } else {
                                 Toast.makeText(this, "Preencha o nome e a quantidade corretamente", Toast.LENGTH_SHORT).show()
                             }
@@ -97,5 +101,10 @@ class ListaActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    private fun atualizarValorTotal() {
+        val total = adapter.produtos.filter { it.status }.sumOf { it.precoTotal }.setScale(2, RoundingMode.HALF_UP)
+        binding.txtValorTotal.text = "Total: R$ ${total}"
     }
 }

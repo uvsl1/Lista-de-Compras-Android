@@ -13,7 +13,8 @@ import com.example.listinha.ui.app.data.repository.ListinhaRepository
 
 class ProdutoAdapter(
     private val context: Context,
-    private var produtos: MutableList<Produto>
+    var produtos: MutableList<Produto>,
+    private val onItemCheckedChange: () -> Unit
 ) : RecyclerView.Adapter<ProdutoAdapter.ViewHolder>() {
 
     private var recyclerView: RecyclerView? = null
@@ -35,6 +36,7 @@ class ProdutoAdapter(
                     repo.atualizarStatusProduto(id, isChecked)
                 }
                 ordenarProdutosComMovimento()
+                onItemCheckedChange.invoke()
             }
 
             binding.btnEditar.setOnClickListener {
@@ -92,6 +94,7 @@ class ProdutoAdapter(
 
                 notifyDataSetChanged()
                 ordenarProdutosComMovimento()
+                onItemCheckedChange.invoke()
             }
             .setNegativeButton("Cancelar", null)
             .show()
@@ -141,5 +144,6 @@ class ProdutoAdapter(
     fun adicionarProduto(produto: Produto) {
         produtos.add(produto)
         ordenarProdutosComMovimento()
+        onItemCheckedChange.invoke()
     }
 }

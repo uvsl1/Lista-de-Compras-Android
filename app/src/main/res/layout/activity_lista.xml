@@ -48,25 +48,39 @@
         app:layout_constraintTop_toBottomOf="@id/nomeLista"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
+        app:layout_constraintBottom_toTopOf="@id/txtValorTotal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <TextView
+        android:id="@+id/txtValorTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total: R$ 0,00"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAdicionarProduto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="Adicionar Produto"
         android:src="@drawable/ic_adicionar"
-        app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
+        app:layout_constraintBottom_toTopOf="@id/txtValorTotal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="100dp" />
+        app:layout_constraintGuide_end="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
