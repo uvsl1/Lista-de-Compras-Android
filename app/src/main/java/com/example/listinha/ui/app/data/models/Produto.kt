@@ -8,7 +8,8 @@ data class Produto(
     var nome: String = "",
     var quantidade: BigDecimal = BigDecimal("0.0").setScale(2, RoundingMode.HALF_UP),
     var status: Boolean = false,
-    var precoUnitario: BigDecimal = BigDecimal("0.0").setScale(2, RoundingMode.HALF_UP)
+    var precoUnitario: BigDecimal = BigDecimal("0.0").setScale(2, RoundingMode.HALF_UP),
+    var listaId: Int? = null
 ) {
     val precoTotal: BigDecimal
         get() = (quantidade * precoUnitario).setScale(2, RoundingMode.HALF_UP)
@@ -18,10 +19,6 @@ data class Produto(
     }
 
     fun alterarStatus() {
-        if (status == false) {
-            status = true
-        } else {
-            status = false
-        }
+        status = !status
     }
 }
