@@ -24,6 +24,10 @@ class ListaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListaBinding.inflate(layoutInflater)
+        binding.btnVoltar.setOnClickListener {
+            finish()
+        }
+
         setContentView(binding.root)
 
         idLista = intent.getIntExtra("idLista", -1)

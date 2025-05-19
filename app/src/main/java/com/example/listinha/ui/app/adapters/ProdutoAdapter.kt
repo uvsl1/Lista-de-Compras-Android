@@ -42,6 +42,22 @@ class ProdutoAdapter(
             binding.btnEditar.setOnClickListener {
                 abrirDialogoEdicao(produto)
             }
+            binding.btnExcluir.setOnClickListener {
+                AlertDialog.Builder(context)
+                    .setTitle("Excluir Produto")
+                    .setMessage("Tem certeza que deseja excluir o produto '${produto.nome}'?")
+                    .setPositiveButton("Sim") { _, _ ->
+                        produto.id?.let { id ->
+                            val repo = ListinhaRepository(context)
+                            repo.excluirProduto(id)
+                            produtos.remove(produto)
+                            notifyDataSetChanged()
+                            onItemCheckedChange.invoke()
+                        }
+                    }
+                    .setNegativeButton("Cancelar", null)
+                    .show()
+            }
         }
     }
 
